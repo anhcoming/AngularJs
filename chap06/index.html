@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="info">
+        Welcome {{info.name}} <br>
+        Age: {{info.age}} <br>
+        Address: {{info.address}} <br>
+        Married: {{isMarried?"Đã kết hôn":"Chưa kết hôn"}} <br>
+        {{info.run()}}
+        <hr>
+        {{count}}
+        <button ng-click="increase()">Cộng</button>
+        <button ng-click="change()">Đổi trạng thái kết hôn</button>
+        <hr>
+        <input type="text" ng-model="username" />
+        <button ng-click="changeName()">Show Name</button>
+         {{greating}}
+    </div>
+    {{name}}
+    <br>
+    <h3 ng-bind="name"></h3><br>
+    <input type="text" ng-model="name" />
+    <script>
+        const app = angular.module("myApp", []);
+        app.controller("info", function ($scope) {
+            $scope.count = 0;
+            $scope.name = "hello";
+            $scope.greating=""
+            $scope.username = "";
+            $scope.changeName = function () {
+                // $scope.greating=$scope.username
+
+                ///cách 2: template string
+                $scope.greating= `Hello ${$scope.username}`;
+                $scope.username=""
+            }
+            $scope.change = function () {
+                $scope.isMarried = !$scope.isMarried
+            }
+
+            $scope.increase = function () {
+                $scope.count++
+            }
+
+            $scope.info = {
+                name: "duc anh",
+                age: 22,
+                address: "Thái Bình",
+                isMarried: false,
+                run: function () {
+                    console.log("Running");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
