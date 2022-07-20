@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="info">
+        <p>Bài 1:</p>
+        <ul>
+            <img src={{image}} alt="" width="10%"><br>
+            <li> {{name}} <br></li>
+            <li>{{birthday}} <br></li>
+            <li> {{male}} <br></li>
+            <li> {{score}}</li>
+        </ul>
+        <br>
+        <hr>
+        <p>Bài 2:</p>
+        <ul>
+            <img src={{student.image}} alt="" width="10%"><br>
+            <li> {{student.name}} <br></li>
+            <li>{{student.birthday}} <br></li>
+            <li> {{student.male}} <br></li>
+            <li> {{student.score}}</li>
+        </ul>
+        <br>
+        <hr>
+        <p>Bài 3:</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Hình</th>
+                    <th scope="col">Họ Và Tên</th>
+                    <th scope="col">Ngày Sinh</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Điểm</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in students">
+                    <th><img src={{item.image}} alt="" style="width:10%"></th>
+                    <td>{{item.name}}</td>
+                    <td>{{item.birthday}}</td>
+                    <td>{{item.male}}</td>
+                    <td>{{item.score}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <hr>
+        <p>Bài 4:</p>
+        <div style="width:30%;margin:auto">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Chiều dài</label>
+                <input type="text" class="form-control" ng-model="chieuDai">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Chiều rộng</label>
+                <input type="text" class="form-control" ng-model="chieuRong">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Diện tích</label>
+                <input type="text" class="form-control" disabled placeholder="{{dientich}}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Chu vi</label>
+                <input type="text" class="form-control" disabled placeholder="{{chuvi}}">
+            </div>
+            <hr>
+            <button style="width:100%" class="btn btn-primary" ng-click="tinh()">Caculate</button>
+        </div>
+        <br>
+        <hr>
+        <p>Bài 5:</p>
+        <div style="width:30%;margin:auto">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Họ tên</label>
+                <input type="text" class="form-control" value="{{name}}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Ngày sinh</label>
+                <input type="text" class="form-control" value="{{birthday}}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Giới tính</label>
+                <input type="text" class="form-control" value="{{male}}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Điểm</label>
+                <input type="text" class="form-control" ng-model="score" value="{{score}}">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Học lực</label>
+                <input type="text" class="form-control" ng-model="diem" disabled placeholder="{{hanhkiem}}">
+            </div>
+            <button ng-click="tinhToan()">Tính</button>
+
+        </div>
+
+       
+    </div>
+    <script>
+        const app = angular.module("myApp", []);
+        app.controller("info", function ($scope) {
+            $scope.image =
+                "https://viettelhochiminh.com.vn/wp-content/uploads/2022/05/hinh-anh-songoku-cap-cuoi-dep_101021714.png";
+            $scope.name = "Son Goku";
+            $scope.birthday = "01/12/2000";
+            $scope.male = "Nam";
+            $scope.score = "8.0";
+
+            // ===========
+
+            $scope.student = {
+                image: "https://i.pinimg.com/236x/dc/3b/ab/dc3bab2741fe97cfb903d1b994647531.jpg",
+                name: "Son Goku Baby",
+                birthday: "26/08/2002",
+                male: "Nữ",
+                score: "8.5"
+            }
+
+            // =========
+
+            $scope.students = [{
+                image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/cb4486c5-4e0b-42d0-8533-85fb94295e91/depurk9-29d2c503-98d4-4fc6-baa1-0b73bc60cb27.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2NiNDQ4NmM1LTRlMGItNDJkMC04NTMzLTg1ZmI5NDI5NWU5MVwvZGVwdXJrOS0yOWQyYzUwMy05OGQ0LTRmYzYtYmFhMS0wYjczYmM2MGNiMjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.1KDBzBmgYhbejZKre-1gv0mhpChKCzhRnWeEm-TYtag",
+                name: "Freza",
+                birthday: "27/09/2004",
+                male: "Nam",
+                score: "8.9"
+            }, {
+                image: "https://i.pinimg.com/236x/dc/3b/ab/dc3bab2741fe97cfb903d1b994647531.jpg",
+                name: "Son Goku Baby",
+                birthday: "26/08/2002",
+                male: "Nữ",
+                score: "8.5"
+            }, {
+                image: "https://i.pinimg.com/550x/09/88/05/0988055ec65c67addff6f12098b2fc5f.jpg",
+                name: "Krinin",
+                birthday: "03/04/1998",
+                male: "Nam",
+                score: "10"
+            }]
+            // =============
+            $scope.chieuDai = 0;
+            $scope.chieuRong = 0;
+            $scope.chuvi = 0;
+            $scope.dientich = 0;
+
+            $scope.tinh = function () {
+                var a = parseFloat($scope.chieuDai);
+                var b = parseFloat($scope.chieuRong);
+
+                $scope.chuvi = (a + b) * 2
+                $scope.dientich = a * b;
+
+            }
+
+            // =========
+            $scope.hanhkiem="";
+            $scope.tinhToan = function () {
+                var x = parseFloat($scope.score);
+
+                if(x<5){
+            $scope.hanhkiem="Rớt";
+
+                }else{
+            $scope.hanhkiem="Đạt";
+                    
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
